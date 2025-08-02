@@ -27,7 +27,7 @@ $comments = getComments();
     <h2>All Comments:</h2>
     <ul>
         <?php while ($row = mysqli_fetch_assoc($comments)): ?>
-            <li><?php echo htmlspecialchars($row['comment']); ?></li>
+            <li>user "<?php echo htmlspecialchars($row['uid']); ?>": <?php echo htmlspecialchars($row['comment']); ?></li>
         <?php endwhile; ?>
     </ul>
 </body>

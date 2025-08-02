@@ -12,14 +12,15 @@ if ($conn->connect_error) {
 
 function createComment($comment) {
     global $conn;
-    
-    $query = "INSERT INTO comment (comment) VALUES ('$comment')";
+    $uid = time() . rand(1000, 9999);
+
+    $query = "INSERT INTO comment (uid, comment) VALUES ('$uid', '$comment')";
     $conn->query($query);
 }
 
 function getComments() {
     global $conn;
-    $query = "SELECT * FROM comment";
+    $query = "SELECT * FROM comment ORDER BY id DESC";
     $result = $conn->query($query);
     return $result;
 }
