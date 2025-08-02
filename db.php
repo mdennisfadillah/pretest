@@ -14,8 +14,10 @@ function createComment($comment) {
     global $conn;
     $uid = time() . rand(1000, 9999);
 
-    $query = "INSERT INTO comment (uid, comment) VALUES ('$uid', '$comment')";
-    $conn->query($query);
+    $stmt = $conn->prepare("INSERT INTO comment (uid, comment) VALUES (?, ?)");
+    $stmt->bind_param("ss", $uid, $comment);
+    $stmt->execute();
+    $stmt->close();
 }
 
 function getComments() {
